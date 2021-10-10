@@ -1,0 +1,46 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/submission_style.css')}}"/>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/submission_js.js')}}"></script>
+</head>
+
+<div id="formdiv">
+    <form name="SubmissionForm" id="SubmissionForm"
+    method="post" enctype="multipart/form-data">
+        <label for="EquipmentPiece">Equipment:</label>
+        <select name="EquipmentPiece" id="EquipmentPiece">
+            {% for item in items %}
+            <option value="{{item}}">{{item}}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="armorTexture">Armor texture:</label>
+        <input type="file"
+               id="armorTexture" name="armorTexture"
+               accept="image/png"
+               size="10kb"/>
+        <br>
+        <img id="armorTextureDisplay"></img>
+        <br>
+
+        <label for="itemTexture">Item texture:</label>
+        <input type="file"
+               id="itemTexture" name="itemTexture"
+               accept="image/png"
+               size="10kb"/>
+        <br>
+        <img id="itemTextureDisplay"></img>
+        <br>
+
+        <label for="Name">Name:</label>
+        <input id="Name" type="text" name="Name"></input>
+        <br>
+
+        <label for="password">Password:</label>
+        <input id="password" type="password" name="password"></input>
+        <br>
+
+        <button id="submit">Submit</button>
+
+        </form>
+</div>

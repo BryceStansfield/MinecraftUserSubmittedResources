@@ -1,0 +1,18 @@
+.formdiv label {
+    float: left;
+    margin-right: 10px;
+}
+.formdiv div {
+    margin-bottom: 15px;
+}
+.formdiv input {
+    width: 90%;
+}
+.formdiv select{
+    width: 90%;
+}
+
+img{
+    image-rendering: pixelated;
+    height: 256;
+}
