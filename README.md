@@ -1,3 +1,5 @@
+NOTE: This was a quick project done at night on a weekend. I can't guarentee that it functions perfectly under all situations, if you encounter anything though feel free to raise an issue or fork.
+
 A web-gui that lets users (with a password) automatically upload texture varients to a servers resource pack
 
 Required config vars (in instance/config.py):
