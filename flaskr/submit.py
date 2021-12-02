@@ -127,21 +127,30 @@ def prepare_temp(instance_path):
 
     return temp_dir
 
-def ensure_pack_initialized(pack_path):
-    armor_path = path.join(pack_path, "assets", "minecraft", "optifine", "cit", "armor")
-    items_path = path.join(pack_path, "assets", "minecraft", "optifine", "cit", "items")
-    if not path.exists(armor_path):
-        os.makedirs(armor_path)
+def ensure_pack_initialized(pack_path, resource_pack_directory, resource_pack_name):
+    www_path = os.path.join(resource_pack_directory, resource_pack_name)
+    if path.exists(www_path):
+        if path.exists(path.join(current_app.instance_path, "pack")):
+            shutil.rmtree(path.join(current_app.instance_path, "pack"))
 
-    if not path.exists(items_path):
-        os.makedirs(items_path)
+        shutil.copyfile(www_path, path.join(current_app.instance_path, resource_pack_name))
+        with zipfile.ZipFile(path.join(current_app.instance_path, resource_pack_name), 'r') as zip_ref:
+            zip_ref.extractall(path.join(current_app.instance_path, "pack"))
+    else:
+        armor_path = path.join(pack_path, "assets", "minecraft", "optifine", "cit", "armor")
+        items_path = path.join(pack_path, "assets", "minecraft", "optifine", "cit", "items")
+        if not path.exists(armor_path):
+            os.makedirs(armor_path)
+
+        if not path.exists(items_path):
+            os.makedirs(items_path)
 
 def add_textures_to_pack(form, files):
     # Getting the packs path and setting folders up
     instance_path = current_app.instance_path
     temp_path = prepare_temp(instance_path)
     pack_path = path.join(instance_path, "pack")
-    ensure_pack_initialized(pack_path)
+    ensure_pack_initialized(pack_path, current_app.config['RESOURCE_PACK_DIR'], current_app.config['RESOURCE_PACK_NAME']+".zip")
 
     # Let's add these files to temp/ with a funny name
     time_str = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
